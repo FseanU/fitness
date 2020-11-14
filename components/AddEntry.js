@@ -1,9 +1,11 @@
 import React from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 import { getMetricMetaInfo, timeToString } from '../utils/helpers'
 import FitnessSlider from './FitnessSlider'
 import Steppers from './Steppers'
 import DateHeader from './DateHeader'
+import TextButton from './TextButton'
 
 function SubmitBtn ({ onPress }) {
   return (
@@ -72,9 +74,33 @@ export default class AddEntry extends React.Component {
       // Clear local notification
     }
 
+    reset = () => {
+      const key = timeToString()
+
+      // Update Redux
+
+      // Route to Home
+
+      // Update "DB"
+    }
+
     render() {
         const metaInfo = getMetricMetaInfo()
 
+        if (true) {
+          return (
+            <View>
+              <Ionicons
+                name='md-happy'
+                size={100}
+              />
+              <Text>You already logged your information for today</Text>
+              <TextButton onPress={this.reset}>
+                Reset
+              </TextButton>
+            </View>
+          )
+        }
         return (
             <View>
               <DateHeader date={(new Date()).toLocaleDateString()} />
