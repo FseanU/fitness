@@ -6,6 +6,7 @@ import FitnessSlider from './FitnessSlider'
 import Steppers from './Steppers'
 import DateHeader from './DateHeader'
 import TextButton from './TextButton'
+import { submitEntry, removeEntry } from '../utils/api'
 
 function SubmitBtn ({ onPress }) {
   return (
@@ -60,6 +61,7 @@ export default class AddEntry extends React.Component {
       const entry = this.state
 
       //  Update Redux
+
       this.setState(() => ({
         run: 0,
         bike: 0,
@@ -67,9 +69,10 @@ export default class AddEntry extends React.Component {
         sleep: 0,
         eat: 0,
       }))
+
       // Navigate to home
 
-      // Save to 'DB'
+      submitEntry({ key, entry })
 
       // Clear local notification
     }
@@ -81,7 +84,7 @@ export default class AddEntry extends React.Component {
 
       // Route to Home
 
-      // Update "DB"
+      removeEntry(key)
     }
 
     render() {
