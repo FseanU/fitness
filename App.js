@@ -10,6 +10,7 @@ export default function App() {
   return (
     <Provider store={createStore(reducer)}>
       <View style={{flex: 1}}>
+        {/* <View style={{flex: 1}} /> */}
         <History />
       </View>
     </Provider>
