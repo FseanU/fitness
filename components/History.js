@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import { Agenda as UdaciFitnessCalendar } from 'react-native-calendars'
 import { receiveEntries, addEntry } from '../actions'
+import MetricCard from './MetricCard'
 import { timeToString, getDailyReminderValue } from '../utils/helpers'
 import { fetchCalendarResults } from '../utils/api'
-import { Agenda as UdaciFitnessCalendar } from 'react-native-calendars'
 import { white } from '../utils/colors'
 
 class History extends Component {
@@ -26,7 +27,7 @@ class History extends Component {
       {today
         ? <Text style={styles.noDataText}>{JSON.stringify(today)}</Text>
         : <TouchableOpacity>
-            <Text>{JSON.stringify(metrics)}</Text>
+            <MetricCard metrics={metrics} />
           </TouchableOpacity>}
     </View>
   )
