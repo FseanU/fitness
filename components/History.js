@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { Agenda as UdaciFitnessCalendar } from 'react-native-calendars'
+import { AppLoading } from 'expo'
 import { receiveEntries, addEntry } from '../actions'
 import MetricCard from './MetricCard'
 import { timeToString, getDailyReminderValue } from '../utils/helpers'
@@ -9,6 +10,9 @@ import { fetchCalendarResults } from '../utils/api'
 import { white } from '../utils/colors'
 
 class History extends Component {
+  state = {
+    ready: false
+  }
   componentDidMount() {
     const { dispatch } = this.props
 
@@ -21,6 +25,9 @@ class History extends Component {
           }))
         }
       })
+      .then(() => this.setState(() => ({
+        ready: true,
+      })))
   }
   renderItem = ({ today, ...metrics }, formattedDate, key) => (
     <View style={styles.item}>
@@ -44,6 +51,11 @@ class History extends Component {
 
   render() {
     const { entries } = this.props
+    const { ready } = this.state
+
+    if (ready === false) {
+      return <AppLoading />
+    }
 
     return (   
       <UdaciFitnessCalendar 
